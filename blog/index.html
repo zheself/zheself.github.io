@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Blog - MarsCJZ</title><meta name="description" content="MarsCJZ - Blog (Under Construction)"><link rel="icon" href="../favicon.ico" type="image/x-icon"><link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"><style>:root {
+  --bg-color: #f8fafc;
+  --grid-color: #e2e8f0;
+  --text-main: #1e293b;
+  --text-sub: #64748b;
+  --accent-color: #3b82f6;
+  --terminal-bg: #0f172a;
+  --terminal-text: #10b981;
+  --font-main: 'Comic Sans MS', 'Helvetica Neue', 'Microsoft Yahei', -apple-system, sans-serif;
+  --font-code: 'Fira Code', 'Consolas', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.grid-bg {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.6; z-index: -2;
+}
+#floating-symbols {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1; pointer-events: none; overflow: hidden;
+}
+.symbol {
+  position: absolute;
+  font-family: var(--font-code);
+  font-weight: bold;
+  opacity: 0; user-select: none;
+}
+.nav-top { padding: 2rem 4rem; position: relative; z-index: 10; }
+.back-link {
+  display: inline-flex; align-items: center;
+  color: var(--text-sub); text-decoration: none;
+  font-size: 1rem; font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.back-link .arrow {
+  margin-right: 8px; font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+.back-link:hover { color: var(--accent-color); transform: translateX(-5px); }
+.main-content {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 4rem 2rem 8rem; text-align: center; z-index: 10;
+}
+.construction-icon {
+  font-size: 5rem; margin-bottom: 1rem;
+  animation: bounce 2s infinite ease-in-out;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+.title {
+  font-size: 3.5rem; font-weight: 900; letter-spacing: 2px;
+  margin-bottom: 1rem; color: var(--text-main);
+  text-shadow: 2px 2px 0px rgba(59, 130, 246, 0.2);
+}
+.subtitle {
+  font-size: 1.2rem; color: var(--text-sub);
+  margin-bottom: 3rem; max-width: 500px; line-height: 1.6;
+}
+.terminal-window {
+  width: 100%; max-width: 600px;
+  background: var(--terminal-bg); border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  overflow: hidden; text-align: left;
+  transform: translateY(20px); opacity: 0;
+}
+.terminal-header {
+  background: #1e293b; padding: 10px 15px;
+  display: flex; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.terminal-buttons { display: flex; gap: 8px; }
+.t-btn { width: 12px; height: 12px; border-radius: 50%; }
+.t-close { background: #ef4444; }
+.t-min { background: #eab308; }
+.t-max { background: #22c55e; }
+.terminal-title {
+  color: #94a3b8; font-size: 0.85rem;
+  font-family: var(--font-code); margin-left: 15px;
+}
+.terminal-body {
+  padding: 20px; font-family: var(--font-code);
+  color: var(--terminal-text); font-size: 0.95rem;
+  line-height: 1.8; min-height: 150px;
+}
+.cursor {
+  display: inline-block; width: 8px; height: 18px;
+  background-color: var(--terminal-text); vertical-align: middle;
+  animation: blink 1s step-end infinite; margin-left: 5px;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.log-line { margin-bottom: 5px; }
+.log-info { color: #3b82f6; }
+.log-warn { color: #eab308; }
+@media (max-width: 768px) {
+  .title { font-size: 2.5rem; }
+  .subtitle { font-size: 1rem; }
+  .terminal-window { max-width: 90%; }
+  .nav-top { padding: 1.5rem 2rem; }
+}
+</style></head><body><div class="grid-bg"></div><div id="floating-symbols"></div><nav class="nav-top"><a class="back-link" href="../"><span class="arrow">←</span> Back to Home</a></nav><main class="main-content"><div class="construction-icon">🚧</div><h1 class="title">Blog is Building...</h1><p class="subtitle">正在用一杯咖啡和两张显卡驱动博客的生成。<br>灵感还在预训练中，请稍后再来访问吧！</p><div class="terminal-window" id="terminal"><div class="terminal-header"><div class="terminal-buttons"><div class="t-btn t-close"></div><div class="t-btn t-min"></div><div class="t-btn t-max"></div></div><div class="terminal-title">build_blog.sh</div></div><div class="terminal-body" id="typewriter"></div></div></main><script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script><script src="../js/blog.js"></script></body></html>
